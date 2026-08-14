@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Hobbymaxxing project-specific
+*.db
+data/token.json
+data/credentials.json
