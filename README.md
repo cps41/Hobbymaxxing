@@ -8,6 +8,10 @@ I have too many hobbies and ambitions, yet not enough time. It's hard to optimiz
 
 Use an orchestration of agents to determine what to do and when.
 
+## Status
+
+Build in progress — see [docs/planning.md](docs/planning.md) for the design and [docs/PROGRESS.md](docs/PROGRESS.md) for what's actually been built so far.
+
 ## Questions
 
 - What timespan is it deciding within?
