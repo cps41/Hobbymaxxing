@@ -28,9 +28,20 @@ Fix: split into two functions in `orchestrator.py`:
 
 This is the idiomatic LangGraph separation: nodes own state changes, edge functions only own "where next."
 
-## Milestone 2 — Personal System Check real integration ⏳ not started
+## Milestone 2 — Personal System Check real integration ✅
 
-Wire real Google Calendar OAuth2 + Open-Meteo into `personal_system.py`, replacing the hardcoded stub context. Everything else stays stubbed.
+**Built:**
+- `src/hobbymaxxing/config.py` — central env/config loading via `python-dotenv` (`ANTHROPIC_API_KEY`, `HOME_LAT`/`HOME_LON`, Google/Oura/Strava credential paths).
+- `src/hobbymaxxing/integrations/weather.py` — `get_current_weather()`, real Open-Meteo call (no key needed), returns temperature, precipitation, weather code, and today's sunset.
+- `src/hobbymaxxing/integrations/calendar_api.py` — `get_events(horizon)`, real Google Calendar OAuth2 installed-app flow, token cached at `data/token.json` after first browser consent.
+- `src/hobbymaxxing/nodes/personal_system.py` — rewritten to call both real integrations. Added `_available_windows()`, a gap-finding helper that derives free time slots by subtracting calendar busy periods from a "now until 22:00" window, and sets `is_dark` by comparing current time to the fetched sunset.
+- `tests/test_graph_wiring.py` — updated to `monkeypatch` `calendar_api.get_events` and `weather.get_current_weather` at the network boundary, so graph-wiring tests validate routing/fan-out/fan-in shape without needing real credentials.
+
+**Verified:** `pytest` passes (2/2) against the mocked integrations. Real end-to-end CLI run (actual Google OAuth + live weather) deferred until credentials (`HOME_LAT`/`HOME_LON`, `data/credentials.json`) are set up — mocked tests confirm the wiring is correct in the meantime.
+
+**Decisions made along the way:**
+- Persistence retention: settled on an **archive, don't delete** policy for milestone 7 (move runs older than a configurable window into a `runs_archive` table) rather than a hard TTL, since history-based reasoning depends on old rows still being queryable somewhere.
+- `oura_data` will be split into `oura_readiness` / `oura_sleep` / `oura_activity` in milestone 4 instead of one opaque blob, for clarity — exact shape to be finalized against Oura's real v2 response then.
 
 ## Milestones 3–8 — not started
 
