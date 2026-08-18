@@ -1,8 +1,8 @@
 import datetime as dt
 from typing import Any
 
-from hobbymaxxing.integrations import calendar_api, weather
-from hobbymaxxing.state import State
+from integrations import calendar_api, weather
+from state import State
 
 _DAY_END_HOUR = 22  # latest hour we consider "available" for a hobby
 

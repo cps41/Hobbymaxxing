@@ -2,8 +2,8 @@ import datetime as dt
 from typing import Any
 
 from hobbymaxxing import config, llm_utils
-from hobbymaxxing.integrations import oura
-from hobbymaxxing.state import State, SubAgentSuggestion
+from integrations import oura
+from state import State, SubAgentSuggestion
 
 _HIGH_ACTIVITY_MINUTES_THRESHOLD = 20  # a day counts as "high intensity" above this
 

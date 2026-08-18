@@ -1,5 +1,5 @@
 from hobbymaxxing import config, llm_utils
-from hobbymaxxing.state import State, SubAgentSuggestion
+from state import State, SubAgentSuggestion
 
 
 def restoration(state: State) -> dict:

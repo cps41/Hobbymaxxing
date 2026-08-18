@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from hobbymaxxing.graph import build_graph
+from graph import build_graph
 
 
 class _FakeLLM:

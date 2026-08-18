@@ -1,4 +1,4 @@
-from hobbymaxxing.state import State, SubAgentSuggestion
+from state import State, SubAgentSuggestion
 
 
 def growth(state: State) -> dict:

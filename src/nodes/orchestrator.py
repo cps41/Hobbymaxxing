@@ -1,5 +1,5 @@
 from hobbymaxxing import config, llm_utils
-from hobbymaxxing.state import State
+from state import State
 
 ALL_DOMAINS = ["fly_fishing", "physical", "restoration", "growth"]
 

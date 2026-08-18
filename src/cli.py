@@ -1,7 +1,7 @@
 import argparse
 from datetime import datetime
 
-from hobbymaxxing.graph import build_graph
+from graph import build_graph
 
 
 def main() -> None:
