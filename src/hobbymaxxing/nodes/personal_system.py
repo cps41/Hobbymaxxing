@@ -53,7 +53,9 @@ def personal_system_check(state: State) -> dict:
     calendar_events = calendar_api.get_events(horizon=horizon)
     weather_current = weather.get_current_weather()
 
-    sunset = dt.datetime.fromisoformat(weather_current["sunset"])
+    # Open-Meteo's timezone=auto returns sunset as a naive local-time string
+    # (no UTC offset); attach now's offset so it can be compared safely.
+    sunset = dt.datetime.fromisoformat(weather_current["sunset"]).replace(tzinfo=now.tzinfo)
     is_dark = now >= sunset
 
     return {

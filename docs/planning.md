@@ -35,7 +35,6 @@ Hobbymaxxing/
         calendar_api.py        # Google Calendar
         weather.py              # Open-Meteo
         oura.py
-        strava.py
         fishing_report.py       # stub/manual-input v1
         traffic.py               # stub v1
       persistence/
@@ -79,7 +78,6 @@ class State(TypedDict, total=False):
 
     # --- Physical domain data ---
     oura_data: dict                     # sleep, readiness, activity scores
-    strava_data: dict                   # recent activity log
     fatigue_assessment: dict            # derived: last strength/run/muay-thai dates, load
 
     # --- History (from persistence layer, read-only context for all agents) ---
@@ -196,7 +194,7 @@ CLI prints a formatted summary: recommendation, reasoning, what was skipped and 
 Scaffolding + state + stub graph: pyproject.toml, module layout, State TypedDict, all five domain nodes as pure stub functions returning hardcoded SubAgentSuggestions, router with hardcoded/simple logic, synthesize node doing basic concatenation (no LLM yet). Prove the graph compiles and runs end-to-end via a test. No API calls, no LLM, no DB yet.
 Personal System Check real integration: wire real Google Calendar OAuth + Open-Meteo; keep everything else stubbed. Verify state gets correctly populated and passed downstream.
 LLM wiring: add langchain-anthropic model client in config.py, convert synthesize node and one domain node (suggest Restoration, since it needs no external API) to real LLM calls with prompts in prompts/. Validates the LangChain/LangGraph LLM-node pattern before scaling to the rest.
-Physical with real Oura + Strava: implement integrations/oura.py, integrations/strava.py, fatigue assessment logic, convert Physical node to real LLM reasoning.
+Physical with real Oura: implement integrations/oura.py, fatigue assessment logic, convert Physical node to real LLM reasoning.
 Restoration + Growth history-based reasoning: implement persistence/history.py helpers properly (needs milestone 6's schema, so this and milestone 6 are somewhat interdependent — build minimal SQLite schema here if not already done, full logging in 6), wire both nodes to real LLM calls using history signals.
 Fly Fishing with weather + stubbed report/traffic: implement the stub fishing-report/traffic functions, wire router's skip-logic conditions for weather/time-of-day, real LLM call for gear/location suggestions.
 Persistence/logging finalized: full SQLite schema, persist node writes complete run records, add a history CLI subcommand to inspect past runs (useful for debugging domain nodes' history-reads).

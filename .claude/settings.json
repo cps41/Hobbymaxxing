@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "PowerShell(.\\\\.venv\\\\Scripts\\\\python.exe -m hobbymaxxing run --horizon today --feeling \"curious and a bit tired\")"
+    ]
+  }
+}

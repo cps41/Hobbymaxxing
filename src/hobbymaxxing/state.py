@@ -21,8 +21,9 @@ class State(TypedDict, total=False):
     weather_current: dict[str, Any]
 
     # Physical domain data
-    oura_data: dict[str, Any]
-    strava_data: dict[str, Any]
+    oura_readiness: dict[str, Any] | None
+    oura_sleep: dict[str, Any] | None
+    oura_activity: list[dict[str, Any]]
     fatigue_assessment: dict[str, Any]
 
     # history context (read-only for all domain nodes)
